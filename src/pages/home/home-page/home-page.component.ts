@@ -30,7 +30,7 @@ export class HomePageComponent implements OnInit {
 
   addBug() {
     let newBug = {
-      index: "PPS101",
+      index: "PPS10010",
       level: "major",
       status: "not started"
     }

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-interface Contact{
-  name:string,
-  sex:string,
-  mobile:string,
-  age?:number
-  random?:number
+interface Bug {
+  index: string,
+  level: string,
+  status: string,
+  assigneeName?: string,
 }
 
 @Component({
@@ -14,51 +13,85 @@ interface Contact{
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-  contacts:Array<Contact>;
-  firstLine:string;
+  bugs: Array<Bug>;
   constructor() {
-   this.getContacts()
+    this.getBugs()
   }
-  
-  getContacts(){
-     this.contacts = [
-      {name:"LiuYuyang",sex:"M",mobile:"1316666666",age:20},
-      {name:"Wangkai",sex:"F",mobile:"1316666667"},
-      {name:"Yaoming",sex:"M",mobile:"1316666668"},
-      {name:"Yaoming",sex:"F",mobile:"1316666668"},
+
+  getBugs() {
+    this.bugs = [
+      { index: "PPS10001", level: "block", status: "waiting for prod-test", assigneeName: "谢理" },
+      { index: "PPS10004", level: "minor", status: "not started" },
+      { index: "PPS10003", level: "major", status: "in development", assigneeName: "李四" },
+      { index: "PPS10002", level: "crital", status: "waiting for pre-test", assigneeName: "张三" },
+      { index: "PPS10005", level: "crital", status: "not started" },
     ]
-    this.firstLine =`第一个联系人是：${this.contacts[0].name}`
   }
 
-  addContact(){
-    let newContact = {
-      name:"Rita",
-      sex:"F",
-      mobile:"13677777777"
+  addBug() {
+    let newBug = {
+      index: "PPS101",
+      level: "major",
+      status: "not started"
     }
-    this.contacts.push(newContact)
+    this.bugs.push(newBug);
   }
 
-  asc(){
+  sortList(type: string) {
+    if (type == "up") {
+      this.asc();
+    }
+    if (type == "down") {
+      this.desc();
+    }
+    if (type == "random") {
+      this.random();
+    }
+  }
+
+  asc() {
     // 正序排列
     // 数组操作API，https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
-    this.contacts.sort((a,b)=>{
-      if(a.sex>b.sex){
+    this.bugs.sort((a, b) => {
+      if (a.index > b.index) {
         return 1
-      }else{
+      } else {
         return -1
       }
     })
-}
-
-
-  desc(){
-    // 逆序排列    
   }
-  random(){
+
+  desc() {
+    // 逆序排列   
+    this.bugs.sort(
+      (a, b) => {
+        if (a.index > b.index) {
+          return -1;
+        } else {
+          return 1;
+        }
+      }
+    )
+  }
+  
+  random() {
     // 随机排列
     // 常用数学计算API，https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math
+    this.bugs.sort(
+      (a, b) => {
+        let randomA = Math.random();
+        let randomB = Math.random();
+        if (randomA > randomB) {
+          return 1;
+        } else {
+          return -1;
+        }
+      }
+    )
   }
+
+
+
   ngOnInit() {
   }
 

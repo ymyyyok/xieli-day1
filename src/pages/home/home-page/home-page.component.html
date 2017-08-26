@@ -1,11 +1,19 @@
+<button (click)="addBug()">添加新Bug</button>
+<button (click)="sortList('up')">正序</button>
+<button (click)="sortList('down')">逆序</button>
+<button (click)="sortList('random')">随机</button>
 
-<button (click)="addContact()">添加新联系人</button>
-<button (click)="asc()">正序</button>
-<button (click)="desc()">逆序</button>
-<button (click)="random()">倒序</button>
-
-<div>第一个联系人是：{{this.contacts[0].name}}</div>
-<div>{{firstLine}}</div>
-<ul>
-    <li *ngFor="let user of contacts">{{user.name}} {{user.sex}} {{user.mobile}}</li>
-</ul>
+<table>
+    <tr>
+        <th>index</th>
+        <th>level></th>
+        <th>status</th>
+        <th>assigneeName</th>
+    </tr>
+    <tr *ngFor="let bug of bugs">
+        <td>{{bug.index}}</td>
+        <td>{{bug.level}}</td>
+        <td>{{bug.status}}</td>
+        <td>{{bug.assigneeName}}</td>
+    </tr>
+</table>
